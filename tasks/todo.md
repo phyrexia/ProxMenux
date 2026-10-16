@@ -19,17 +19,18 @@ Entrega en dos PR (ADR rev. 2 §2.9): PR1 TUI manual por root; PR2 autoarranque 
 
 ## DAG PR1 — `feature/console-tui`
 
-- [ ] P1-T1 `console_metrics.py` + `host other` (principal, Codex gpt-6-sol) — despachada
-- [ ] P1-T2 `console_snapshot.py` (principal, Codex gpt-6-sol) — despachada
-- [ ] P1-T3 caché compartida `pvesh` en `flask_server.py` (principal, Codex gpt-6-sol) — despachada
-- [ ] P1-T4 `console_render.py` (principal, Codex gpt-6-sol) — despachada
-- [ ] P1-T6 i18n `runtime.consoleTui` en `en/common.json` (light, Haiku) — despachada
-- [ ] P1-T5 `console_tui.py` (principal) — tras T1, T2, T4
-- [ ] P1-T7 hook del publicador en `flask_server.py` (light) — tras T2, T3
-- [ ] P1-T8 `AppRun --tui` + `build_appimage.sh` + `AppImage/README.md` (light) — tras T5
-- [ ] P1-T9 comando `proxmenux-console` root-only + instaladores + `config_menu.sh` (light) — tras T8
-- [ ] P1-T10 CI `test-console-tui.yml` (light)
-- [ ] P1-T11 docs web + CHANGELOG + README (light)
+- [x] P1-T6 i18n `runtime.consoleTui` — 757ce219 (Haiku)
+- [x] P1-T3 caché compartida `pvesh` — 149eb2e6 (Codex gpt-6-sol)
+- [x] P1-T1 `console_metrics.py` + `host other` — f5120d36 (Codex gpt-6-sol)
+- [x] P1-T2 `console_snapshot.py` — 8b5277f6 (Codex gpt-6-sol + ronda de corrección Haiku 5.5: publicador nunca tumba el Monitor, versión desde el caller, C1)
+- [x] P1-T7 hook del publicador — 4cd35bcf (Haiku 5.5; integración: reusa `get_proxmox_version`)
+- [x] P1-T4 `console_render.py` — 04b26b43 (Codex gpt-6-sol + ronda de corrección: placeholders, `_age`, `host_other` del ViewModel, `PVE x.y`, claves de columnas, tests con catálogo real)
+- [x] P1-T5 `console_tui.py` — 55eec7ff (Codex gpt-6-sol + ronda Haiku 5.5: ruta de catálogos empaquetados `parents[2]`, `setlocale`, muestreo monotónico)
+- [x] P1-T8 `AppRun --tui` + build + `AppImage/README.md` — 1b819d67 (Haiku 5.5)
+- [x] P1-T9 comando `proxmenux-console` + instaladores + menú — 31e2e6cf (Haiku 5.5)
+- [x] P1-T10 CI `test-console-tui.yml` — 65127237 (Haiku 5.5)
+- [x] P1-T11 docs — absorbida: el upstream no recibe CHANGELOG/README/docs web de contribuidores (sólo MacRimi los edita); la documentación va en `AppImage/README.md` (T8) y en el cuerpo del PR, ofreciendo la página de Settings
+- [ ] Fase 5 PR1: auditoría del diff (en curso sobre 65127237) · QA remota (bloqueada: `.npmrc`) · build AppImage en QA · PR al upstream
 
 ## DAG PR2 — `feature/console-tui-autostart` (tras mergear PR1)
 
