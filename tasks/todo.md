@@ -11,24 +11,29 @@ Code branch: `feature/console-tui` (from `origin/develop` 227780ab) · Notes bra
 
 - [x] 1. Concepción — grill escrito con requisitos del Owner (hilo 2026-10-14/16)
 - [x] 2. Diseño — ADR 001 `proposed` (Fable)
-- [ ] 3. Auditoría adversarial del ADR (Gemini 3.8 Flash vía `agy`) → recibo `docs/analysis/2026-10-17-console-tui-redteam-verdict.md`; Critical/Important corregidos; ADR `accepted`
+- [x] 3. Auditoría adversarial del ADR — ronda 1 APROBAR CON CAMBIOS (1C/5I/4m), revisión 2 adjudicada, ronda 2 APROBAR 0/0/0 → recibo `docs/analysis/2026-10-17-console-tui-redteam-verdict.md`; ADR `accepted` (617441ec)
 - [ ] 4. Implementación (DAG abajo), TDD, un commit por tarea
 - [ ] 5. QA remota (qf-test) + auditoría del diff + PR a `MacRimi/ProxMenux` `develop` desde el fork, sin atribución IA
 
-## DAG de implementación (ADR §2.9)
+Entrega en dos PR (ADR rev. 2 §2.9): PR1 TUI manual por root; PR2 autoarranque en tty1 (rama `feature/console-tui-autostart` desde `develop` tras mergear PR1).
 
-- [ ] T1 `console_metrics.py` — lectores `/proc`/`/sys` + tasas (principal)
-- [ ] T2 `console_snapshot.py` — contrato, normalizador, estados, escritura atómica, lease, lector (principal)
-- [ ] T4 `console_render.py` — render puro a `Grid`, vistas A/B, glifos, colapso, `sanitize` (principal)
-- [ ] T6 catálogo i18n `runtime.consoleTui.*` en `AppImage/messages/en/common.json` (light)
-- [ ] T8 wrapper getty + lanzador manual en `scripts/console/` (principal)
-- [ ] T3 publicador en `flask_server.py` (light) — tras T2
-- [ ] T5 `console_tui.py` — bucle curses, teclas, i18n, señales (principal) — tras T1, T2, T4
-- [ ] T9 instaladores `install_console_tui` / `remove_console_tui` (principal) — tras T8
-- [ ] T7 empaquetado `AppRun --tui`, `build_appimage.sh` (light) — tras T5
-- [ ] T10 menú `config_menu.sh` + desinstalación (light) — tras T9
-- [ ] T11 CI `test-console-tui.yml` (light)
-- [ ] T12 docs web + CHANGELOG + README (light)
+## DAG PR1 — `feature/console-tui`
+
+- [ ] P1-T1 `console_metrics.py` + `host other` (principal, Codex gpt-6-sol) — despachada
+- [ ] P1-T2 `console_snapshot.py` (principal, Codex gpt-6-sol) — despachada
+- [ ] P1-T3 caché compartida `pvesh` en `flask_server.py` (principal, Codex gpt-6-sol) — despachada
+- [ ] P1-T4 `console_render.py` (principal, Codex gpt-6-sol) — despachada
+- [ ] P1-T6 i18n `runtime.consoleTui` en `en/common.json` (light, Haiku) — despachada
+- [ ] P1-T5 `console_tui.py` (principal) — tras T1, T2, T4
+- [ ] P1-T7 hook del publicador en `flask_server.py` (light) — tras T2, T3
+- [ ] P1-T8 `AppRun --tui` + `build_appimage.sh` + `AppImage/README.md` (light) — tras T5
+- [ ] P1-T9 comando `proxmenux-console` root-only + instaladores + `config_menu.sh` (light) — tras T8
+- [ ] P1-T10 CI `test-console-tui.yml` (light)
+- [ ] P1-T11 docs web + CHANGELOG + README (light)
+
+## DAG PR2 — `feature/console-tui-autostart` (tras mergear PR1)
+
+- [ ] P2-T1 wrapper getty · P2-T2 `console_lifecycle.sh` · P2-T3 instaladores · P2-T4 lanzador con `setpriv` · P2-T5 menú · P2-T6 CI · P2-T7 docs
 
 ## Bloqueos / decisiones del Owner
 
