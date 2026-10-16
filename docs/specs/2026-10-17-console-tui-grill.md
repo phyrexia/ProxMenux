@@ -1,6 +1,7 @@
 # Grill — Consola TUI de ProxMenux Monitor en la salida de video del nodo
 
 - Fecha: 2026-10-17
+- Revisión: 2 (2026-10-17, tras auditoría ronda 1: §5 y §6 ajustados; entrega en dos PRs secuenciales, ver ADR §2.9 y §8)
 - Rol: Designer (Fable). Documento de concepción; no es implementación.
 - Rama: `feature/console-tui` sobre `origin/develop` 227780ab.
 - ADR asociado: `.notes/docs/adrs/001-console-tui.md`.
@@ -45,6 +46,7 @@ Un nodo Proxmox conectado a un monitor por HDMI/VGA muestra hoy un `login:` iner
 - Métricas locales (CPU, RAM, carga, red, disco, temperatura, zram): muestreo y repintado **cada 1 s** (btop usa 2000 ms por defecto; 1 s es el tick de `/proc/stat` y mantiene la sensación "en vivo" sin coste apreciable).
 - Snapshot del Monitor (`console.json`): publicación **cada 5 s** mientras haya un consumidor (alineado con `_PVESH_CACHE_TTL = 5`), con `/cluster/status` cada 10 s. Sin consumidor: **0 llamadas a `pvesh`**, sólo un `stat()` cada 2 s.
 - Historial: ventana de **60 muestras** de CPU total (60 s) en memoria de la TUI; nada persiste en disco.
+- Repintado completo forzado **cada 30 s** (además de `r` y de los cambios de tamaño): `tty1` recibe los `printk` del kernel y curses sólo repinta diferencias.
 
 ### Presupuesto de recursos en el nodo
 - TUI: **≤ 2 % de un núcleo** de promedio a 240×67 y **≤ 40 MiB RSS**; primer frame en **≤ 1,5 s** desde el exec.
@@ -60,6 +62,8 @@ Un nodo Proxmox conectado a un monitor por HDMI/VGA muestra hoy un `login:` iner
 ### Clúster y datos
 - Diseñado para **≤ 16 nodos y ≤ 1000 guests** (los nodos que no quepan se resumen como "+N nodes"); el snapshot admite hasta 2000 guests.
 - Umbrales de antigüedad: muestra local > 3 s → `STALE`; snapshot ≤ 15 s fresco; 15–60 s `stale` (ámbar, con edad); > 60 s o ausente → `Monitor unavailable` (rojo) manteniendo los últimos valores atenuados.
+- Ventana de arranque: sin snapshot y `/proc/uptime` < **120 s**, o snapshot con estado `starting`, se muestra `Monitor starting…` en ámbar, nunca el rojo de caída; el publicador escribe un snapshot `starting` nada más arrancar y el primero con datos en cuanto ve el lease.
+- Consumo del host fuera de los guests: indicador `host other` (CPU en núcleos, memoria en GiB) en los títulos de las listas TOP, calculado como total local menos suma de guests (y menos ARC en memoria).
 - Agregados de clúster sólo con quorum y con datos frescos de todos los nodos online; de lo contrario se muestra cobertura (`2/3 nodes`), nunca un total aparentemente completo.
 - Sin quorum: panel de clúster en rojo `NO QUORUM`, nodos offline marcados; la TUI nunca escribe en `/etc/pve` ni intenta reparar nada.
 
@@ -77,6 +81,8 @@ Un nodo Proxmox conectado a un monitor por HDMI/VGA muestra hoy un `login:` iner
 ## 6. Fuera de alcance (explícito)
 
 - Acciones administrativas (start/stop/migrar guests, apagar nodo, shell embebida).
+- Lista de procesos del host al estilo bashtop (tecla `p`): el Owner pidió VM/CT; leer `/proc/*/stat` de ~1000 PIDs cada segundo es la parte cara de bashtop y mostraría nombres de procesos root antes del login. La necesidad real (saber si el nodo está saturado por algo que no es un guest) se cubre con el indicador `host other`.
+- Ejecutar comandos desde la TUI (`systemctl`, `pvesh`, `sensors`): todo lo que necesita se lee de `/proc`, `/sys` y el snapshot.
 - Ratón, truecolor, 256 colores, fuentes personalizadas, cambio de VT (`chvt`), autologin.
 - Históricos más allá de 60 s en memoria; nada de RRD ni persistencia.
 - Métricas remotas por nodo que exijan llamadas adicionales (`rrddata`, `/nodes/{node}/status`, red/zram/temperatura de nodos remotos): la fila por nodo de la vista B usa sólo `/cluster/resources` + `/cluster/status`.
