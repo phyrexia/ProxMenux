@@ -1,6 +1,6 @@
 # ADR 001 — Consola TUI de ProxMenux Monitor en tty1 (HDMI/VGA)
 
-- Estado: **proposed**
+- Estado: **accepted** (2026-10-17; auditoría adversarial aprobada en ronda 2 — recibo `.notes/docs/analysis/2026-10-17-console-tui-redteam-verdict.md`)
 - Fecha: 2026-10-17
 - Revisión: 2 (2026-10-17, tras auditoría ronda 1; registro de adjudicación en §8)
 - Autor del diseño: Designer (Fable). Implementación autorizada por el Owner el 2026-10-16 17:48.
