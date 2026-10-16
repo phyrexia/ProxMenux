@@ -30,7 +30,19 @@ Entrega en dos PR (ADR rev. 2 §2.9): PR1 TUI manual por root; PR2 autoarranque 
 - [x] P1-T9 comando `proxmenux-console` + instaladores + menú — 31e2e6cf (Haiku 5.5)
 - [x] P1-T10 CI `test-console-tui.yml` — 65127237 (Haiku 5.5)
 - [x] P1-T11 docs — absorbida: el upstream no recibe CHANGELOG/README/docs web de contribuidores (sólo MacRimi los edita); la documentación va en `AppImage/README.md` (T8) y en el cuerpo del PR, ofreciendo la página de Settings
-- [ ] Fase 5 PR1: auditoría del diff (en curso sobre 65127237) · QA remota (bloqueada: `.npmrc`) · build AppImage en QA · PR al upstream
+- [x] Fase 5 PR1 — auditoría del diff: ronda 1 sobre 65127237 APROBAR CON CAMBIOS (0C/4I/7m); fix 8ae1a74a + 5c7a8ab0; ronda 2 APROBAR 0/0/0 → recibo `docs/analysis/2026-10-17-console-tui-pr1-diff-verdict.md` (vigente sobre 5c7a8ab0)
+- [x] Escaneo de credenciales del diff (TruffleHog estático): 0 candidatos; pedido AgentBus #17938 resuelto (el corte del autoreview es el defecto de base de #16699)
+- [x] Rama `feature/console-tui` empujada al fork `phyrexia/ProxMenux` (sin PR)
+- [ ] **QA remota PR1** (bloqueada, decisión del Owner por `web/.npmrc`): `unittest` de los 8 archivos de prueba en 3.11/3.13, smoke de pty, `bash -n` de scripts, build del AppImage y `AppRun --tui --once`
+- [ ] Aceptación en hardware (Owner, paso 0 de ADR §2.8): `proxmenux-console` por SSH en un P3 con el AppImage de la rama
+- [ ] Abrir PR1 a `MacRimi/ProxMenux` `develop` (sin atribución IA; cuerpo con evidencia, rollback y oferta de la página de docs) — tras QA verde
+- [ ] PR2 (autoarranque tty1) — tras mergear PR1
+
+## Revisión (2026-10-17)
+
+- Lo que funcionó: diseño de Fable con fuentes primarias (vt.c, ncurses, Cluster.pm) que resistió dos rondas de auditoría; partir el DAG en archivos sin solape permitió 5 implementadores en paralelo sin conflictos.
+- Lo que la revisión del coordinador atrapó y la auditoría no: placeholders del catálogo duplicados por el render, ruta de catálogos empaquetados (`parents[1]` vs `[2]`), falta de `setlocale`, publicador que podía tumbar el Monitor, orden de commits (T9 antes que T8 habría dejado `AppRun --tui` arrancando Flask).
+- Ruido de herramientas: la inicialización de `.ai-memory` de cada sesión Codex duplica un bloque en `.gitignore` del worktree (revertido dos veces); `agy` headless deja la salida vacía si el modelo intenta escribir un archivo (se resolvió pidiéndole responder sólo en texto).
 
 ## DAG PR2 — `feature/console-tui-autostart` (tras mergear PR1)
 
