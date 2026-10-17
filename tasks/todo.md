@@ -33,7 +33,10 @@ Entrega en dos PR (ADR rev. 2 §2.9): PR1 TUI manual por root; PR2 autoarranque 
 - [x] Fase 5 PR1 — auditoría del diff: ronda 1 sobre 65127237 APROBAR CON CAMBIOS (0C/4I/7m); fix 8ae1a74a + 5c7a8ab0; ronda 2 APROBAR 0/0/0 → recibo `docs/analysis/2026-10-17-console-tui-pr1-diff-verdict.md` (vigente sobre 5c7a8ab0)
 - [x] Escaneo de credenciales del diff (TruffleHog estático): 0 candidatos; pedido AgentBus #17938 resuelto (el corte del autoreview es el defecto de base de #16699)
 - [x] Rama `feature/console-tui` empujada al fork `phyrexia/ProxMenux` (sin PR)
-- [ ] **QA remota PR1** (bloqueada, decisión del Owner por `web/.npmrc`): `unittest` de los 8 archivos de prueba en 3.11/3.13, smoke de pty, `bash -n` de scripts, build del AppImage y `AppRun --tui --once`
+- [x] **QA remota PR1** — Owner autorizó (2026-10-17, «AUTORIZO») sacar `web/.npmrc` del índice sólo durante `qf-test up` en esta serie. Run 1 (5c7a8ab0, qaw-p3-01): 2 fallos reales (`IndexError` de `group(1)` en `_header`, 21 tests; test de NIC con `replace` amplio) → 79ab5888 + 0b6288bd. Primer frame real → d3838d2d (zram/quorum/TOP sin datos) y 731b099b (formas compactas 80×24). Ronda 3 del auditor → 54f73b4a (standalone con datos viejos, `Tab node`). Run 5 (54f73b4a, qaw-p3-02): 112 tests verdes + `bash -n` + `py_compile` + JSON + `AppRun --tui --once` empaquetado OK. Build completo del AppImage: se corta por `.deb` de hardware en el worker (limitación previa).
+- [x] Auditoría del diff: rondas 3 y 4 sobre los deltas de QA; recibo vigente `docs/analysis/2026-10-17-console-tui-pr1-diff-verdict.md` sobre 54f73b4a (0/0/0)
+- [x] Owner validó el aspecto con los frames reales (2026-10-17: «está muy bien, me gusta mucho») — `docs/analysis/2026-10-17-console-tui-frames.txt`
+- [x] `notes/console-tui` empujada al fork propio (OK del Owner 2026-10-17)
 - [ ] Aceptación en hardware (Owner, paso 0 de ADR §2.8): `proxmenux-console` por SSH en un P3 con el AppImage de la rama
 - [ ] Abrir PR1 a `MacRimi/ProxMenux` `develop` (sin atribución IA; cuerpo con evidencia, rollback y oferta de la página de docs) — tras QA verde
 - [ ] PR2 (autoarranque tty1) — tras mergear PR1

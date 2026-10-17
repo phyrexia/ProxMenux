@@ -1,0 +1,149 @@
+===== node 80x24
+ PROXMENUX MONITOR    [Node] Cluster  pve-01 · PVE 9.0 · up 7d 04h     07:56:36
+┌─CPU  70%────────────────────────────────┐┌─MEMORY  16.0/32 GiB  50%──────────┐
+│ ███████████████████████████░░░░░░░░░░░░ ││ ████████████████░░░░░░░░░░░░░░░░░ │
+│ load 0.42 0.51 0.48 · 4 thr · 48° C     ││ ARC 2.0 GiB · avail 16.0 GiB      │
+│ ░░█░█                                   ││ ZRAM 143M/3.2G 1.8x · swap 0/8.0G │
+└─────────────────────────────────────────┘└───────────────────────────────────┘
+┌─NET eno1 2.5G───────┐┌─DISK─────────────────────┐┌─CLUSTER · QUORUM OK 2/3───┐
+│ RX 3.2 Mb/s         ││ R 42 MiB/s  W 8.0 MiB/s  ││ pve-01* 7% 50% online     │
+│ TX 800 Kb/s         ││ local-zfs 40%            ││ +2 nodes                  │
+└─────────────────────┘└──────────────────────────┘└───────────────────────────┘
+┌─TOP CPU · host other 1.6c────────────┐┌─TOP MEMORY · host other 8.0 GiB──────┐
+│ VM 101 plex        pve-01 1.2c   60% ││ VM 103 db             pve-02 6.0 GiB │
+│ CT 205 nginx       pve-02 0.3c   30% ││ VM 101 plex           pve-01 4.0 GiB │
+│ VM 103 db          pve-02 0.1c    5% ││ VM 110 win    pve-01 unknown 2.0 GiB │
+│                                      ││ CT 205 nginx          pve-02 819 MiB │
+│                                      ││                                      │
+│                                      ││                                      │
+│                                      ││                                      │
+│                                      ││                                      │
+│                                      ││                                      │
+│                                      ││                                      │
+│                                      ││                                      │
+└──────────────────────────────────────┘└──────────────────────────────────────┘
+ q login · Tab cluster · r refresh · a glyphs · Ctrl+Alt+F2             data 2s
+===== node 128x48
+ PROXMENUX MONITOR    [Node] Cluster  pve-01 · PVE 9.0 · up 7d 04h                                                     07:56:36
+┌─CPU  70%─────────────────────────────────────────────────────┐┌─MEMORY  16.0/32 GiB  50%─────────────────────────────────────┐
+│ ██████████████████████████████████████████░░░░░░░░░░░░░░░░░░ ││ ██████████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ │
+│ load 0.42 0.51 0.48 · 4 thr · 48° C                          ││ ARC 2.0 GiB · avail 16.0 GiB                                 │
+│ ░░░░░                                                        ││ ZRAM 143 MiB/3.2 GiB 1.8x · swap 0 MiB/8.0 GiB               │
+│ ░░█░░                          CPU0 10%       CPU1 80%       ││                                                              │
+│ ░██░█                          ░░░░░          ████░          ││                                                              │
+│ ░████                                                        ││                                                              │
+└──────────────────────────────────────────────────────────────┘└──────────────────────────────────────────────────────────────┘
+┌─NET eno1 2.5G────────────────────┐┌─DISK─────────────────────────────────────┐┌─CLUSTER lab · QUORUM OK 2/3──────────────────┐
+│ RX 3.2 Mb/s                      ││ R 42 MiB/s  W 8.0 MiB/s                  ││ pve-01* 7% 50% online                        │
+│ TX 800 Kb/s                      ││ local-zfs 40%                            ││ pve-02 9% 56% online                         │
+│                                  ││                                          ││ pve-03 0% 0% offline                         │
+└──────────────────────────────────┘└──────────────────────────────────────────┘└──────────────────────────────────────────────┘
+┌─TOP CPU (host cores) · host other 1.6c───────────────────────┐┌─TOP MEMORY · host other 8.0 GiB──────────────────────────────┐
+│ VM 101 plex                                pve-01 1.2c   60% ││ VM 103 db                                     pve-02 6.0 GiB │
+│ CT 205 nginx                               pve-02 0.3c   30% ││ VM 101 plex                                   pve-01 4.0 GiB │
+│ VM 103 db                                  pve-02 0.1c    5% ││ VM 110 win                            pve-01 unknown 2.0 GiB │
+│                                                              ││ CT 205 nginx                                  pve-02 819 MiB │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+│                                                              ││                                                              │
+└──────────────────────────────────────────────────────────────┘└──────────────────────────────────────────────────────────────┘
+ q login · Tab cluster · r refresh · a glyphs · Ctrl+Alt+F2                                                             data 2s
+===== cluster 80x24
+ PROXMENUX MONITOR    Node [Cluster]  lab QUORUM OK 2/3 coverage 2/3   07:56:36
+ NODE      STATUS   CPU           MEM                          ROOT   GUESTS
+ pve-03    offline  --            --                           --     0/0
+ pve-01*   online   7%   █░░░░░░░ 16.0 GiB/32 GiB     ████░░░░ 40%    1/2
+ pve-02    online   9%   █░░░░░░░ 18.0 GiB/32 GiB     ████░░░░ 40%    2/2
+── GUESTS  running 3 · stopped 1 · sort: cpu (c/m) ─────────────────────────────
+ TYPE  ID   NAME               NODE     STATUS    CPU          MEM
+ VM    101  plex               pve-01   running   1.2c  60%   4.0 GiB
+ CT    205  nginx              pve-02   running   0.3c  30%   819 MiB
+ VM    103  db                 pve-02   running   0.1c   5%   6.0 GiB
+ VM    110  win                pve-01   unknown   0.0c   0%   2.0 GiB
+
+
+
+
+
+
+
+
+
+
+
+
+ q login · Tab cluster · c/m sort · r refresh · a glyphs                data 2s
+===== cluster 128x48
+ PROXMENUX MONITOR    Node [Cluster]  lab QUORUM OK 2/3 coverage 2/3                                                   07:56:36
+ NODE      STATUS   CPU           MEM                          ROOT   GUESTS     UP
+ pve-03    offline  --            --                           --     0/0        --
+ pve-01*   online   7%   █░░░░░░░ 16.0 GiB/32 GiB     ████░░░░ 40%    1/2        7d 04h
+ pve-02    online   9%   █░░░░░░░ 18.0 GiB/32 GiB     ████░░░░ 40%    2/2        7d 04h
+── GUESTS  running 3 · stopped 1 · sort: cpu (c/m) ─────────────────────────────────────────────────────────────────────────────
+ TYPE  ID   NAME               NODE     STATUS    CPU          MEM
+ VM    101  plex               pve-01   running   1.2c  60%   4.0 GiB
+ CT    205  nginx              pve-02   running   0.3c  30%   819 MiB
+ VM    103  db                 pve-02   running   0.1c   5%   6.0 GiB
+ VM    110  win                pve-01   unknown   0.0c   0%   2.0 GiB
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ q login · Tab cluster · c/m sort · r refresh · a glyphs                                                                data 2s
+frames_rc=0
