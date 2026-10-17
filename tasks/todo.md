@@ -38,7 +38,8 @@ Entrega en dos PR (ADR rev. 2 §2.9): PR1 TUI manual por root; PR2 autoarranque 
 - [x] Owner validó el aspecto con los frames reales (2026-10-17: «está muy bien, me gusta mucho») — `docs/analysis/2026-10-17-console-tui-frames.txt`
 - [x] `notes/console-tui` empujada al fork propio (OK del Owner 2026-10-17)
 - [ ] Aceptación en hardware (Owner, paso 0 de ADR §2.8): `proxmenux-console` por SSH en un P3 con el AppImage de la rama
-- [ ] Abrir PR1 a `MacRimi/ProxMenux` `develop` (sin atribución IA; cuerpo con evidencia, rollback y oferta de la página de docs) — tras QA verde
+- [x] PR1 abierto como **borrador**: https://github.com/MacRimi/ProxMenux/pull/472 (base `develop`, head 54f73b4a, 17 commits, 34 archivos, sin atribución IA). Borrador hasta la aceptación en hardware del Owner; `gh pr ready 472 -R MacRimi/ProxMenux` lo marca listo.
+- [ ] Aceptación en hardware (Owner): en un P3 con HDMI, como root, `git clone -b feature/console-tui https://github.com/phyrexia/ProxMenux /root/pmx-console && python3 -I /root/pmx-console/AppImage/scripts/console_tui.py` en tty1 — verificar glifos ACS (en especial la barra llena, que ncurses traduce a U+25AE en UTF-8), `a` para alternar, `q` sale. La vista Clúster con datos necesita el Monitor de la rama (publicador): llega con el AppImage beta que construya el upstream o con el workflow de build del fork si el Owner lo autoriza.
 - [ ] PR2 (autoarranque tty1) — tras mergear PR1
 
 ## Revisión (2026-10-17)
